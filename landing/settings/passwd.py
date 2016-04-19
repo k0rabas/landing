@@ -1,0 +1,2 @@
+DBPASS = 'yourpassword'
+SMTPPASS = ''
