@@ -1,0 +1,46 @@
+body {
+  min-height: 400px;
+}
+
+.navbar-static-top {
+  margin-bottom: 0px;
+  background-color: #55aa9e;
+}
+.navbar-default {
+    border-color: #ADD8E6;
+}
+
+.align-text-center {
+    text-align: center;
+}
+
+.jumbotron {
+    background-color: #55aa9e;
+    color: #fff;
+}
+
+.navbar-default .navbar-brand {
+    color: #FFF;
+}
+.navbar-default .navbar-brand:hover {
+    color: #ADD8E6;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #ADD8E6;
+}
+
+.navbar-default .navbar-toggle{
+    border-color: transparent;
+}
+.navbar-default .navbar-toggle:hover {
+    border-color: #ADD8E6;
+}
+.navbar-default .navbar-toggle:hover {
+    background-color: transparent;
+}
+
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ADD8E6;
+}

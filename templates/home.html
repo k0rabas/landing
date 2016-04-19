@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block head_title %}Welcome | {% endblock%}
+
+{% block jumbotron %}
+
+{% if not request.user.is_authenticated %}
+    <div class="jumbotron">
+        <div class="container">
+    
+            <div class="row">
+              <div class="col-xs-12 col-sm-5" style=''>
+                  <h2>Join us!</h2>
+                  <p>And get the journey started today.</p>
+                  <p>
+                    <a class="btn btn-lg btn-primary" href="{% url 'registration_register' %}" role="button">Join &raquo;</a>
+                  </p>
+              </div>
+              <div class="col-xs-12 col-sm-7 align-text-center" style=''>
+                <iframe width="500" height="281" src="https://embed-ssl.ted.com/talks/thomas_peschak_dive_into_an_ocean_photographer_s_world.html" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+              </div>
+            </div>
+        </div> <!-- /container -->
+    </div>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+    <h1>You are logged in</h1>
+    {% if queryset %}
+        <h2>Welcome Admin</h2>
+        <table class='table'>
+        {% for ins in queryset %}
+            <tr><td>{{forloop.counter}}</td><td>{{ins}}</td><td>{{ins.full_name}}</td><td>{{ins.timestamp|timesince}} ago</td></tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+{% else %}
+    <div class="row">
+        <div class="col-sm-4 " style=''>
+            <p class='lead align-text-center'>{{title}}</p>
+            <form method='POST' action=''> {% csrf_token %}
+                {{form|crispy}}
+                <input class="btn btn-primary" type='submit' value='Sign Up' />
+            </form>
+        </div>
+        <div class="col-sm-4 " style=''>
+            <p class='lead align-text-center'>Into the ocean</p>
+        <img src="{% static 'img/into_the_ocean.jpg' %}" class="img-responsive" />
+        <!-- <img src="http://cdnstatic.visualizeus.com/thumbs/14/7e/dive,blue,clothes,floating,girl,ocean-147e27bdb47b4648ea8b7bac83d2eeb0_h.jpg" class="img-responsive" /> -->
+        <!-- <img src="https://tedideas.files.wordpress.com/2016/03/1_thomas-peschak_surfing-seal.jpg" class="img-responsive" /> -->
+        
+        </div>
+        <div class="col-sm-4 align-text-center" style=''>
+            <p class='lead'>Award winning concept</p>
+            <span class="fa-stack fa-5x">
+              <i class="fa fa-circle-thin fa-stack-2x"></i>
+              <i class="fa fa-trophy fa-stack-1x"></i>
+            </span>
+<!--             <i class="fa fa-trophy fa-5x" aria-hidden="true"></i> -->
+
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+

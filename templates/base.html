@@ -1,0 +1,98 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+<!--     <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>{% block head_title %}{% endblock%} Landing Page</title>
+
+    <!-- Latest compiled and minified CSS -->
+<!--     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    
+    <!-- Latest compiled and minified JavaScript -->
+<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
+
+  </head>
+
+  <body>
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                  data-toggle="collapse" data-target="#navbar" aria-expanded="false" 
+                  aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <!-- <img src="{% static 'img/mvp_landing_logo.png' %}" /> -->
+                Landing
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+
+              {% if not request.user.is_authenticated and not "/accounts/login" in request.get_full_path %}      
+                <li>
+                <form class='navbar-form' method='POST' action='{% url "auth_login" %}'>{% csrf_token %}
+                    <div class='form-group'>
+                        <input type='text' class='form-control' name='username' placeholder='Username'/>
+                    </div>
+                    <div class='form-group'>
+                        <input type='password' class='form-control' name='password' placeholder='Password'/>
+                    </div>
+                    <button type='submit' class='btn btn-default'>Login</button>
+                </form>
+                </li>
+              {% endif %}
+              {% if request.user.is_authenticated %}
+                <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+              {% else %}
+                <li ><a href="{% url 'registration_register' %}">Register</a></li>
+              {% endif %}
+            </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+        {% block jumbotron %}
+        {% endblock %}
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{% static 'js/jquery.min.js' %}"><\/script>')</script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+  </body>
+</html>
