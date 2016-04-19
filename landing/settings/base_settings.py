@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from .passwd import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -30,7 +31,7 @@ ALLOWED_HOSTS = []  # will be overrided by .production an than by .local if it e
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'k0rabas@gmail.com'
-EMAIL_HOST_PASSWORD = ''    # standard password
+EMAIL_HOST_PASSWORD = SMTPPASS
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -99,7 +100,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'landing_db',
         'USER': 'landing',
-        'PASSWORD': 'Kozanostra1',
+        'PASSWORD': DBPASS,     # imported from .passwd
         'HOST': 'localhost',
         'PORT': '3306',
     }

@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 from django.conf import settings
+from .passwd import *
+
 if not settings.DEBUG:
     import os
     
@@ -30,7 +32,7 @@ if not settings.DEBUG:
     
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_HOST_USER = 'k0rabas@gmail.com'
-    EMAIL_HOST_PASSWORD = ''    # standard password
+    EMAIL_HOST_PASSWORD = SMTPPASS      # imported from .passwd
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
     
@@ -99,7 +101,7 @@ if not settings.DEBUG:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'landing_db',
             'USER': 'landing',
-            'PASSWORD': 'Kozanostra1',
+            'PASSWORD': DBPASS,     # imported from .passwd
             'HOST': 'localhost',
             'PORT': '3306',
         }
