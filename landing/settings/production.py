@@ -10,10 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 from django.conf import settings
-from .passwd import *
 
 if not settings.DEBUG:
     import os
+    from .passwd import SMTPPASS,DBPASS
+
     
     # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -23,7 +24,8 @@ if not settings.DEBUG:
     # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
     
     # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = 'y4o#v=6f0b%*n0g%24)^id4wmoox2z2a!va_mke^%^e40=ht67'
+    # loaded from .passwd
+    # SECRET_KEY = ''
     
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
